@@ -1,3 +1,5 @@
+'use strict'
+
 // declaração de variáveis
 
 const scoreContainer = document.querySelector("#score-container");
@@ -13,72 +15,227 @@ let actualQuestion = 0;
 const questions = 
 [
     {
-        "question": "PHP foi desenvolvido para qual fim?",
+        "question": "Qual a principal funcionalidade do Git?",
         "answers": 
         [
             {
-                "answer": "back-end",
+                "answer": "Controle de versão",
                 "correct": true
             },
             {
-                "answer": "front-end",
+                "answer": "Gerenciamento de pacotes",
                 "correct": false
             },
             {
-                "answer": "Sistema operacional",
+                "answer": "Desenvolvimento de APIs",
                 "correct": false
             },
             {
-                "answer": "Banco de dados",
+                "answer": "Criação de containers",
                 "correct": false
-            },
+            }
         ]
     },
     {
-        "question": "Uma forma de declarar variável em JavaScript:",
+        "question": "Qual linguagem é mais utilizada para criar aplicativos Android nativos?",
         "answers": 
         [
             {
-                "answer": "$var",
+                "answer": "Swift",
                 "correct": false
             },
             {
-                "answer": "var",
+                "answer": "Kotlin",
                 "correct": true
             },
             {
-                "answer": "@var",
+                "answer": "C#",
                 "correct": false
             },
             {
-                "answer": "#let",
+                "answer": "JavaScript",
                 "correct": false
-            },
+            }
         ]
     },
     {
-        "question": "Qual o seletor de id no CSS?",
+        "question": "O que significa a sigla 'SQL'?",
         "answers": 
         [
             {
-                "answer": "#",
+                "answer": "Secure Query Language",
+                "correct": false
+            },
+            {
+                "answer": "Structured Query Language",
                 "correct": true
             },
             {
-                "answer": ".",
+                "answer": "Server Query Language",
                 "correct": false
             },
             {
-                "answer": "@",
+                "answer": "System Query Language",
                 "correct": false
-            },
-            {
-                "answer": "/",
-                "correct": false
-            },
+            }
         ]
     },
-]
+    {
+        "question": "Qual tag HTML é usada para criar um link?",
+        "answers": 
+        [
+            {
+                "answer": "<a>",
+                "correct": true
+            },
+            {
+                "answer": "<link>",
+                "correct": false
+            },
+            {
+                "answer": "<href>",
+                "correct": false
+            },
+            {
+                "answer": "<url>",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "question": "O que significa 'const' em JavaScript?",
+        "answers": 
+        [
+            {
+                "answer": "Declara uma constante",
+                "correct": true
+            },
+            {
+                "answer": "Declara uma variável mutável",
+                "correct": false
+            },
+            {
+                "answer": "Declara um objeto estático",
+                "correct": false
+            },
+            {
+                "answer": "Declara um número inteiro",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "question": "Qual comando é usado para inicializar um repositório Git?",
+        "answers": 
+        [
+            {
+                "answer": "git start",
+                "correct": false
+            },
+            {
+                "answer": "git init",
+                "correct": true
+            },
+            {
+                "answer": "git create",
+                "correct": false
+            },
+            {
+                "answer": "git clone",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "question": "Qual estrutura de dados funciona com o conceito LIFO?",
+        "answers": 
+        [
+            {
+                "answer": "Fila (Queue)",
+                "correct": false
+            },
+            {
+                "answer": "Pilha (Stack)",
+                "correct": true
+            },
+            {
+                "answer": "Lista ligada (Linked List)",
+                "correct": false
+            },
+            {
+                "answer": "Árvore binária (Binary Tree)",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "question": "Qual é a função do 'flexbox' no CSS?",
+        "answers": 
+        [
+            {
+                "answer": "Posicionar elementos em um grid",
+                "correct": false
+            },
+            {
+                "answer": "Criar layouts flexíveis e responsivos",
+                "correct": true
+            },
+            {
+                "answer": "Definir estilos para textos",
+                "correct": false
+            },
+            {
+                "answer": "Aplicar sombras em caixas",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "question": "Qual operador lógico representa 'OU' em JavaScript?",
+        "answers": 
+        [
+            {
+                "answer": "&&",
+                "correct": false
+            },
+            {
+                "answer": "||",
+                "correct": true
+            },
+            {
+                "answer": "!",
+                "correct": false
+            },
+            {
+                "answer": "^",
+                "correct": false
+            }
+        ]
+    },
+    {
+        "question": "O que é uma API REST?",
+        "answers": 
+        [
+            {
+                "answer": "Uma biblioteca de JavaScript",
+                "correct": false
+            },
+            {
+                "answer": "Uma interface para comunicação entre sistemas baseada em HTTP",
+                "correct": true
+            },
+            {
+                "answer": "Um servidor de banco de dados",
+                "correct": false
+            },
+            {
+                "answer": "Uma ferramenta de versionamento",
+                "correct": false
+            }
+        ]
+    }
+];
+
 
 // início do jogo
 
@@ -159,6 +316,45 @@ function createQuestion(indexOfActualQuestion)
 
 }   
 
+// esconder ou mostrar (toggle) o quiz e placar
+
+function hideOrShowQuizAndScoreBoard()
+{
+
+    quizContainer.classList.toggle('hide');
+    scoreContainer.classList.toggle('hide');
+
+}
+
+// exibe resultado final
+
+function showResultMessage()
+{
+    // ocultar o quiz e exibir o placar
+
+    hideOrShowQuizAndScoreBoard();
+
+    // calcular a pontuação
+
+    const score = ((points / questions.length) * 100).toFixed(2);
+
+    // trocar os dados da tela de resultado
+
+    const displayScore = document.querySelector('#display-score span');
+    displayScore.textContent = score.toString();
+
+    // alterar o número de perguntas corretas
+
+    const correctAnswers = document.querySelector('#correct-answer');
+    correctAnswers.textContent = points.toString();
+
+    // alterar o número de perguntas totais
+
+    const questionsQty = document.querySelector('#questions-qty');
+    questionsQty.textContent = questions.length.toString();
+    
+}
+
 // exibir próxima pergunta
 
 function nextQuestion()
@@ -174,6 +370,10 @@ function nextQuestion()
             if(actualQuestion >= questions.length)
             {
                 // apresenta o resultado do quiz
+
+                showResultMessage();
+
+                return; // sair da função
             }
 
             createQuestion(actualQuestion);
@@ -224,6 +424,29 @@ function checkAnswer(button)
 
 }
 
+// reiniciar o quiz
+
+const restartButton = document.querySelector('#restart');
+
+restartButton.addEventListener
+(
+    "click", 
+    function()
+    {
+        // zerar o jogo
+
+        actualQuestion = 0;
+        points = 0;
+
+        // ocultar o placar e exibir o quiz
+
+        hideOrShowQuizAndScoreBoard();
+
+        // iniciar o jogo novamente
+
+        init()
+    }
+)
 
 // inicialização do quiz
 

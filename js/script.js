@@ -3,7 +3,7 @@
 const scoreContainer = document.querySelector("#score-container");
 const quizContainer = document.querySelector("#quiz-container");
 const question = document.querySelector("#question");
-const answerBox = document.querySelector("#answers-box");
+const answersBox = document.querySelector("#answers-box");
 const letters = ["a", "b", "c", "d"];
 let points = 0;
 let actualQuestion = 0;
@@ -96,7 +96,7 @@ function createQuestion(indexOfActualQuestion)
 {
     // limpar a questão anterior
 
-    const oldButtons = answerBox.querySelectorAll("button");
+    const oldButtons = answersBox.querySelectorAll("button");
 
     oldButtons.forEach
     (
@@ -113,6 +113,49 @@ function createQuestion(indexOfActualQuestion)
 
     questionText.textContent = questions[indexOfActualQuestion].question;
     questionNumber.textContent = indexOfActualQuestion + 1;
+
+    // insere as alternativas
+
+    questions[indexOfActualQuestion].answers.forEach
+    (
+        function(answer, index)
+        {
+            // cria o modelo do botão do quizz
+
+            const answerTemplate = document.querySelector('.answer-template').cloneNode(true);
+
+            const letterBtn = answerTemplate.querySelector('.btn-letter');
+            const answerText = answerTemplate.querySelector('.question-answer');
+
+            letterBtn.textContent = letters[index];
+            answerText.textContent = answer['answer'];
+
+            answerTemplate.setAttribute('correct-answer', answer['correct']);
+
+            // remover classes não utilizadas
+
+            answerTemplate.classList.remove('hide');
+            answerTemplate.classList.remove('answer-template');
+
+            // inserir alternativa na tela 
+
+            answersBox.appendChild(answerTemplate);
+
+            // inserir um evento de clique no botão
+
+            answerTemplate.addEventListener("click", function(){
+                console.log(this);
+            })
+
+
+            console.log(answerTemplate);
+
+        }
+    );
+
+    // próxima questão (incrementa o índice da questão) 
+
+    actualQuestion++;
 
 }   
 

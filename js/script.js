@@ -144,7 +144,7 @@ function createQuestion(indexOfActualQuestion)
             // inserir um evento de clique no botão
 
             answerTemplate.addEventListener("click", function(){
-                console.log(this);
+                checkAnswer(this);
             })
 
 
@@ -158,6 +158,72 @@ function createQuestion(indexOfActualQuestion)
     actualQuestion++;
 
 }   
+
+// exibir próxima pergunta
+
+function nextQuestion()
+{
+    // timer para usuário ver as respostas
+
+    setTimeout
+    (
+        function()
+        {
+            // verifica se ainda há perguntas
+
+            if(actualQuestion >= questions.length)
+            {
+                // apresenta o resultado do quiz
+            }
+
+            createQuestion(actualQuestion);
+
+        }
+        , 1600
+    )
+}
+
+// checando a resposta do usuário
+
+function checkAnswer(button)
+{
+    // selecionar todos os botões
+
+    const buttons =  answersBox.querySelectorAll('button');
+
+    // verifica se a resposta está correta e adiciona classes aos botões
+
+    buttons.forEach
+    (
+        function(btn)
+        {
+            if(btn.getAttribute('correct-answer') === "true")
+            {
+                btn.classList.add('correct-answer');
+
+                // checa se o usuário acertou a pergunta
+
+                if(btn === button)
+                {
+                    // incremento dos pontos
+
+                    points++;
+                }
+
+            }
+            else
+            {
+                btn.classList.add('wrong-answer');
+            }
+        }
+    );
+
+    // exibir próxima pergunta
+
+    nextQuestion(); 
+
+}
+
 
 // inicialização do quiz
 

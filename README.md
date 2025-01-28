@@ -19,4 +19,6 @@ O quiz de programação apresenta uma série de perguntas relacionadas a tópico
 - **CSS**: Estilização da página para uma apresentação visual atraente e responsiva.
 - **JavaScript (DOM e Eventos)**: Lógica para interação com o usuário, manipulação das perguntas, respostas e cálculo da pontuação.
 
+## Resultado do projeto
 
+https://github.com/user-attachments/assets/16b1bf2a-aa7a-403b-9c0f-fe7ff8f1363d
